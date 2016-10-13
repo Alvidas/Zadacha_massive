@@ -33,7 +33,11 @@ public class Zadacha {
         System.out.println("Найдено " + ln + " строки.");
         scan.close();
 
+<<<<<<< HEAD
         String[] line = new String[ln];         // Запись построчно в массив.
+=======
+        String[] line = new String[ln];// Запись построчно в массив.
+>>>>>>> origin/master
         int i = 0;
         try {
 
