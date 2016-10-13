@@ -17,7 +17,7 @@ public class Zadacha {
     Вывести наибольшей элем из строки.
      */
     public static void main(String[] args) {
-        Scanner scan=null; //Считаем количество строк.
+        Scanner scan=null;                      //Считаем количество строк.
         int ln = 0;
         try {
             scan = new Scanner(new File("in.txt"));
@@ -33,7 +33,7 @@ public class Zadacha {
         System.out.println("Найдено " + ln + " строки.");
         scan.close();
 
-        String[] line = new String[ln];// Запись по строчно в массив.
+        String[] line = new String[ln];         // Запись построчно в массив.
         int i = 0;
         try {
 
@@ -57,16 +57,19 @@ public class Zadacha {
         int l1[]= new int[ln];
         int matrix[][] = new int[ln][];
         StringTokenizer m1;
-        int b =0;
+        int maxb =0;
         int br[] = new int[ln];
-        for(int e=0; e<ln; e++) {// Разбиваем строку по символьно.
+        for(int e=0; e<ln; e++) {           // Разбиваем строку посимвольно.
             m1 = new StringTokenizer(line[e]);
             l1[e] = m1.countTokens();
-            b = l1[e];
-            if(b>br[e]) {
-                br[e] = b;
+            br[e] = l1[e];
+            if(e<ln) {                      //Находим самую длиную строку.
+                if (e==0) {
+                    maxb = l1[e];
+                }else if(l1[e]>maxb){
+                    maxb = l1[e];
+                }
             }
-            //System.out.println(b);
         }
         for (int j = 0; j < ln; j++) { //Задаем размер матрицу.
             matrix[j] = new int[br[j]];
@@ -98,9 +101,12 @@ public class Zadacha {
             System.out.println("");
         }
 
-        System.out.println("====================");
+        for(int li=0; li<maxb; li++) {
+            System.out.print("==");
+        }
+        System.out.println("");
 
-        int ch = 0;// Поиск наибольших чисел.
+        int ch = 0;// Поиск наибольшего числа в строке.
         int max[] = new int[ln];
         for(int h=0; h < matrix.length; h++){
             for(int d=0; d < matrix[h].length; d++){
@@ -110,9 +116,34 @@ public class Zadacha {
                 }
             }
         }
+        for(int el:max) {// Вывод наибольшего числа в строке.
 
-        for(int el:max) {// Вывод наибольших чисел.
             System.out.print(el + " ");
         }
+        System.out.print(" -Наибольшие числа в строке.");
+        System.out.println(" ");
+
+        int matrixkv[][] = new int[ln][maxb]; //Прямоугольная матрица.
+        for(int h=0; h < matrix.length; h++){
+            for(int d=0; d < matrix[h].length; d++){
+                matrixkv[h][d] = matrix[h][d];
+            }
+        }
+
+        int chr = 0; //Поиск наибольшего числа в ряду.
+        int maxr[] = new int[maxb];
+        for(int hr=0; hr < maxb; hr++){
+            for(int dr=0; dr < ln; dr++){
+                chr = matrixkv[dr][hr];
+                if(chr>maxr[hr]){
+                    maxr[hr]=chr;
+                }
+            }
+        }
+        for(int el:maxr) {// Вывод наибольшего числа в ряду.
+
+            System.out.print(el + " ");
+        }
+        System.out.print(" -Наибольшие числа в ряду.");
     }
 }
